@@ -1,6 +1,7 @@
 from unittest.mock import Mock
 import praktikum.ingredient_types
 import praktikum
+from praktikum import database
 from praktikum.burger import Burger, Bun
 from praktikum.database import Database
 
@@ -51,3 +52,10 @@ class TestBurger:
                       "(==== black bun ====)\n\n" \
                       "Price: 400"
         assert get_receipt == burger.get_receipt()
+
+    def test_move_ingredient(self):
+        burger = Burger()
+        burger.add_ingredient('Соус с шипами Антарианского плоскоходца')
+        burger.add_ingredient('Мясо бессмертных моллюсков Protostomia')
+        burger.move_ingredient(0, 1)
+        assert burger.ingredients == ['Мясо бессмертных моллюсков Protostomia', 'Соус с шипами Антарианского плоскоходца']
